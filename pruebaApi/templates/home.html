@@ -1,0 +1,9 @@
+<ul class="list-group justify-content-center">
+    <li class="list-group-item" ng-repeat="registers in registros.posts">
+        <h1 class="inline-block">{{registers.nombre}}</h1><br>
+        <strong>Edad: {{registers.edad}}</strong><br>
+        <strong>Nacimiento: {{registers.nacimiento}}</strong>
+        <button type="button" class="btn btn-outline-danger float-right  ml-1">Eliminar</button>
+        <button type="button" class="btn btn-outline-primary float-right">Modificar</button>
+    </li>
+</ul>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyFirstApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body ng-controller="SecondController">
+    {{"Hola "+ nombre}}
+    <p>
+        <input type="text" ng-model="nuevoComentario.comentario"><br>
+        <input type="text" ng-model="nuevoComentario.username"><br>
+        <button ng-click="agregarComentario()">Agreagar Comentarios</button>
+        <br>
+        {{"Hola "+ apellido}}
+        <h3>Comentarios</h3>
+        <ul>
+            <li ng-repeat="comentario in comentarios">
+                {{comentario.comentario}} - <strong>{{comentario.
+                    username}}</strong>
+            </li>
+        </ul>
+    </p>
+    <script src ="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="controller.js"></script>
+</body>
+</html>

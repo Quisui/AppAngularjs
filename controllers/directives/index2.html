@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <title>Autocomplete Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+
+    <h1>Autocomplete Example</h1>
+
+    <div ng-controller="Controller">
+
+        <div>
+            <label>Selected:</label>
+            <ul>
+                <li ng-repeat="selectedTag in selectedTags">
+                  {{selectedTag}}
+                  &nbsp;
+                  <b ng-click="removeSelectedTag($index)"><i>remove</i></b>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <label>Search: </label>
+            <input type="text" ng-model="searchPattern"/>
+            <autocomplete values="tags" search="searchPattern" suggestions="suggestions" selected="selectedTags" ></autocomplete>
+        </div>
+
+        <ul>
+           <li ng-repeat="suggestion in suggestions">
+              {{suggestion}}
+              &nbsp;
+              <b ng-click="addToSelectedTags($index)"><i>add</i></b>
+            </li>
+         </ul>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script>
+        
+        angular.module('app', [])
+        /* This is the main conroller */
+        .controller('Controller', ['$scope', function($scope) {
+            /* Variables to store the values */
+            $scope.searchPattern = "";
+            $scope.selectedTags = [];
+            $scope.suggestions = [];
+            $scope.tags = ['Mercury','Venus','Earth','Mars','Saturn','Uranus','Neptun','Pluto'];
+            /* 
+            * The following two functions to add and remove tags are placed here in the main controller, 
+            * because of both the selected tags and the suggestions are listed outside of the autocomplete tag. 
+            * If you add a template to the autocomplete directive it would be reasonable to put these functions there too. 
+            */
+            $scope.addToSelectedTags=function(index){
+                if($scope.selectedTags.indexOf($scope.suggestions[index])===-1){
+                    $scope.selectedTags.push($scope.suggestions[index]);
+                    $scope.searchPattern = "";
+                }
+            }
+            $scope.removeSelectedTag=function(index){
+                $scope.selectedTags.splice(index,1);
+            }
+        }])
+        /* This is the directive to handle <autocomplete> elements */
+        .directive('autocomplete', ['$http', function($http) {
+            /* link is used to place all the logic for the dom mainpulation. */
+            function link(scope, element, attrs) {
+                /* $http could be used here to get the search result from a http service instead of scope.values */
+                scope.search = function() {
+                    scope.suggestions = scope.values.filter(function(value){
+                        return value.indexOf(scope.searchPattern)!== -1;
+                    });
+                }
+                /* Executes a new search when the pattern has changed */
+                scope.$watch('searchPattern', function(newValue, oldValue) {
+                    scope.searchPattern = newValue;
+                    scope.search();
+                });
+            };
+            return {
+                /* Restricts the directive to tag elements */
+                restrict: 'E',
+                /* Associates the attributes values of the autocomplete tag with the variables */
+                scope: {
+                    values: '=values',
+                    searchPattern: '=search',
+                    suggestions: '=suggestions',
+                    selected: '=selected'
+                },
+                /* Registers the dom listener and manipulator function */
+                link: link
+            };
+        }]);
+    </script>
+  </body>
+</html>

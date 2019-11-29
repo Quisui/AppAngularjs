@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+        <button type="button" class="btn btn-outline-primary" ng-mouseover="bandera = true" ng-mouseout="bandera = false">Primary</button>
+        <span ng-show="bandera">&alt; - Click Me </span>
+        <p>
+            {{bandera}}
+        </p>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+</body>
+</html>

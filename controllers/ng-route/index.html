@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CustomeDirective">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .circular{
+            border-radius: 25% 0 25% 0;
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            
+        }
+        .no-list li{
+            list-style-type: none;
+        }
+        body,html{
+            text-align: center;
+            background-color: #eee;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body ng-controller="ReposController">
+    <div ng-view></div>
+    <script src="https://code.angularjs.org/1.7.8/angular-route.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="autocomplete-jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+    <script src="directives.js"></script>
+</body>
+
+</html>
